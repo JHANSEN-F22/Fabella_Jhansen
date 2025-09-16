@@ -1,28 +1,21 @@
-# Use PHP with Apache
-FROM php:8.1-apache
+# Use PHP 8.2 with Apache
+FROM php:8.2-apache
 
 # Enable Apache mod_rewrite
 RUN a2enmod rewrite
 
-# Install git and unzip (needed by Composer)
-RUN apt-get update && apt-get install -y git unzip
-
-# Install Composer
-COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
-
 # Set working directory
 WORKDIR /var/www/html
 
-# Copy project files into container (only the CRUD folder)
-COPY CRUD/ /var/www/html/
+# Copy LavaLust project into Apache root
+COPY ./CRUD/LavaLust/ /var/www/html/
 
-# Copy composer.json and composer.lock into container
+# Copy Composer files and install dependencies
 COPY composer.json composer.lock /var/www/html/
+RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
+    && php composer-setup.php --install-dir=/usr/local/bin --filename=composer \
+    && php -r "unlink('composer-setup.php');" \
+    && composer install
 
-# Install dependencies
-RUN composer install
-
-# Expose port 80
+# Expose Apache port
 EXPOSE 80
-
-CMD ["apache2-foreground"]
