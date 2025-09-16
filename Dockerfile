@@ -4,13 +4,16 @@ FROM php:8.2-apache
 # Enable Apache mod_rewrite
 RUN a2enmod rewrite
 
+# Install PDO MySQL extension
+RUN docker-php-ext-install pdo pdo_mysql
+
 # Set working directory
 WORKDIR /var/www/html
 
-# Copy LavaLust project into Apache root
+# Copy your project files
 COPY ./CRUD/LavaLust/ /var/www/html/
 
-# Copy Composer files and install dependencies
+# Copy composer files and install dependencies
 COPY composer.json composer.lock /var/www/html/
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
     && php composer-setup.php --install-dir=/usr/local/bin --filename=composer \
