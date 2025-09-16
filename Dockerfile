@@ -5,7 +5,8 @@ FROM php:8.1-apache
 RUN a2enmod rewrite
 
 # Copy project files into container
-COPY . /var/www/html/
+COPY CRUD/ /var/www/html/
+
 
 # Set working directory
 WORKDIR /var/www/html
