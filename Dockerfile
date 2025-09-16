@@ -4,17 +4,22 @@ FROM php:8.1-apache
 # Enable Apache mod_rewrite
 RUN a2enmod rewrite
 
-# Copy project files into container
-COPY CRUD/ /var/www/html/
+# Install git and unzip (needed by Composer)
+RUN apt-get update && apt-get install -y git unzip
 
+# Install Composer
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 # Set working directory
 WORKDIR /var/www/html
 
-# Install composer
-COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
+# Copy project files into container (only the CRUD folder)
+COPY CRUD/ /var/www/html/
 
-# Install dependencies from composer.json
+# Copy composer.json and composer.lock into container
+COPY composer.json composer.lock /var/www/html/
+
+# Install dependencies
 RUN composer install
 
 # Expose port 80
