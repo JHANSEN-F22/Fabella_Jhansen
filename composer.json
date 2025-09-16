@@ -1,0 +1,8 @@
+{
+  "name": "fabella/crud-project",
+  "description": "Simple PHP CRUD Project",
+  "type": "project",
+  "require": {
+    "php": ">=7.4"
+  }
+}
