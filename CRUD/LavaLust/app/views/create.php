@@ -3,14 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Create</title>
+  <title>Create Student</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
 
-    * {
-      box-sizing: border-box;
-    }
-
+    * { box-sizing: border-box; }
     body {
       font-family: 'Inter', sans-serif;
       background: linear-gradient(135deg, #dfe9f3, #f8f9fa);
@@ -27,7 +24,7 @@
       border-radius: 14px;
       box-shadow: 0 8px 22px rgba(0,0,0,0.12);
       width: 80%;
-      max-width: 300px; /* tighter width */
+      max-width: 300px;
     }
 
     h1 {
@@ -70,22 +67,21 @@
       background: transparent;
     }
 
-   button {
-  width: 50%;
-  padding: 12px;
-  border: none;
-  border-radius: 8px;
-  font-size: 15px;
-  font-weight: 600;
-  color: white;
-  cursor: pointer;
-  background: linear-gradient(90deg, #3f29e5ff, #7e29dfff, #b10bc0ff);
-  background-size: 200% auto;
-  transition: all 0.3s ease;
-  display: block;       /* make it block-level */
-  margin: 15px auto 0;  /* center horizontally */
-}
-
+    button {
+      width: 50%;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 600;
+      color: white;
+      cursor: pointer;
+      background: linear-gradient(90deg, #3f29e5ff, #7e29dfff, #b10bc0ff);
+      background-size: 200% auto;
+      transition: all 0.3s ease;
+      display: block;
+      margin: 15px auto 0;
+    }
 
     button:hover {
       background-position: right center;
@@ -94,13 +90,12 @@
     }
   </style>
 
-  <!-- Font Awesome for icons -->
   <script src="https://kit.fontawesome.com/2c36e9b7b1.js" crossorigin="anonymous"></script>
 </head>
 <body>
   <div class="form-container">
     <h1>Student Form</h1>
-    <form action="<?=site_url('/user/create');?>" method="post">
+    <form action="<?= site_url('user/update/'.$students['id']); ?>" method="post">
       <div class="input-group">
         <i class="fas fa-user"></i>
         <input type="text" id="lastname" name="lastname" placeholder="Lastname" required>

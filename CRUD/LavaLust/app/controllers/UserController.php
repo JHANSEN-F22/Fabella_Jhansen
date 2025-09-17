@@ -37,7 +37,7 @@ class UserController extends Controller {
             );
 
             if($this->UserModel->insert($data)) {
-             redirect('/user/show');
+             redirect('/');
             } else {
                 echo 'Error in inserting data.';
             }
@@ -62,7 +62,7 @@ class UserController extends Controller {
               );
   
               if($this->UserModel->update($id,$data)) {
-               redirect('/user/show');
+               redirect('/');
               } else {
                   echo 'Error in updating data.';
               }
@@ -73,7 +73,7 @@ class UserController extends Controller {
 
     public function delete($id) {
         if($this->UserModel->delete($id)) {
-            redirect('/user/show');
+            redirect('/');
         } else {
             echo 'Error in deleting data.';
         }
